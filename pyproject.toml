@@ -1,6 +1,6 @@
 [build-system]
 requires = ["setuptools>=61.0", "wheel"]
-build-backend = "setuptools.backends.legacy:build"
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "projectdevsetup"
@@ -9,7 +9,7 @@ description = "Automatic developer environment setup for beginners"
 readme = "README.md"
 license = { file = "LICENSE" }
 authors = [
-    { name = "Rosh Hellwett", email = "your@email.com" }
+    { name = "roshhellwett", email = "roshhellwett@icloud.com" }
 ]
 keywords = [
     "developer setup", "beginner", "vscode", "gcc", "jdk",
