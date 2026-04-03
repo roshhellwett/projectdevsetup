@@ -1,3 +1,9 @@
+![Repo Size](https://img.shields.io/github/repo-size/roshhellwett/projectdevsetup?style=for-the-badge)
+![Stars](https://img.shields.io/github/stars/roshhellwett/projectdevsetup?style=for-the-badge)
+![Forks](https://img.shields.io/github/forks/roshhellwett/projectdevsetup?style=for-the-badge)
+![Issues](https://img.shields.io/github/issues/roshhellwett/projectdevsetup?style=for-the-badge)
+![Dev Setup](https://img.shields.io/badge/DevSetup-0A0A0A?style=for-the-badge&logo=linux&logoColor=white)
+
 # PROJECT DEV SETUP
 
  Beginner-friendly tool that helps set up a coding environment for common programming languages. It is designed for people who want a guided setup experience instead of manually installing everything one by one.
