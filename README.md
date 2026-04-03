@@ -1,6 +1,6 @@
 # projectdevsetup
 
-Automatic developer environment setup for beginners — by Zenith Open Source Projects
+Automatic developer environment setup for beginners - by Zenith Open Source Projects
 
 ## What is this?
 
@@ -34,7 +34,8 @@ Follow the simple on-screen instructions.
 
 ## Credits
 
-Made with ❤️ by [Zenith Open Source Projects](https://zenithopensourceprojects.vercel.app)
+Developed by roshhellwett
+Copyright (c) 2026 Zenith Open Source Projects
 
 ## License
 
