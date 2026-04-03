@@ -55,7 +55,12 @@ def run() -> None:
     divider()
 
     installer = Installer()
-    total_steps = 4
+    if language_key == "all":
+        total_steps = 11  # 8 languages + VS Code + extensions + file + venv
+    elif language_key == "python":
+        total_steps = 5  # install + VS Code + extensions + file + venv
+    else:
+        total_steps = 4  # install + VS Code + extensions + file
     current_step = 1
 
     if language_key == "all":
@@ -97,8 +102,10 @@ def run() -> None:
         created = _create_starter_file(language_key, file_name, output_dir)
         if created is not None:
             created_files.append(created)
+    current_step += 1
 
     if language_key in ("python", "all"):
+        step(current_step, total_steps, "Setting up Python virtual environment")
         create_venv(output_dir)
 
     if vscode_ok and created_files:

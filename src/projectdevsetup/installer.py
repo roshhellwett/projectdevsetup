@@ -27,7 +27,7 @@ from projectdevsetup.utils.os_detect import SystemInfo, detect_system
 URLS = {
     "jdk_windows": "https://download.oracle.com/java/21/latest/jdk-21_windows-x64_bin.exe",
     "node_windows": "https://nodejs.org/dist/latest/node-latest-x64.msi",
-    "go_windows": "https://go.dev/dl/go1.22.0.windows-amd64.msi",
+    "go_windows": "https://go.dev/dl/go1.24.4.windows-amd64.msi",
 }
 
 
@@ -73,7 +73,7 @@ class Installer:
     def _install_python_windows(self) -> bool:
         tmp = get_temp_dir()
         arch = "amd64" if self.sys_info.is_64bit else "win32"
-        url = f"https://www.python.org/ftp/python/3.12.0/python-3.12.0-{arch}.exe"
+        url = f"https://www.python.org/ftp/python/3.13.2/python-3.13.2-{arch}.exe"
         installer = tmp / "python_installer.exe"
         if not download_file(url, installer, "Python"):
             return False
@@ -126,7 +126,7 @@ class Installer:
         arch = "x86_64" if self.sys_info.is_64bit else "i686"
         url = (
             "https://github.com/msys2/msys2-installer/releases/download/"
-            f"2024-01-13/msys2-{arch}-20240113.exe"
+            f"2025-07-14/msys2-{arch}-20250714.exe"
         )
         installer = tmp / "msys2_installer.exe"
         if not download_file(url, installer, "MSYS2 (GCC)"):
