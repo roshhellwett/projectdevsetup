@@ -35,6 +35,44 @@ class WizardTests(unittest.TestCase):
                 wizard._preflight_checks()
         self.assertEqual(ctx.exception.code, 1)
 
+    def test_run_python_flow_completes_happy_path(self) -> None:
+        fake_installer = type(
+            "FakeInstaller",
+            (),
+            {
+                "__init__": lambda self: setattr(self, "sys_info", object()),
+                "install_for_language": lambda self, language: True,
+            },
+        )
+        created_file = Path("fake-output/hello.py")
+
+        with patch("projectdevsetup.wizard._preflight_checks"), patch(
+            "projectdevsetup.wizard._select_language", return_value=("Python", "python")
+        ), patch(
+            "projectdevsetup.wizard._get_file_name", return_value="hello"
+        ), patch(
+            "projectdevsetup.wizard._get_output_dir", return_value=Path("fake-output")
+        ), patch(
+            "projectdevsetup.wizard._create_starter_file", return_value=created_file
+        ) as create_file, patch(
+            "projectdevsetup.wizard.Installer", fake_installer
+        ), patch(
+            "projectdevsetup.wizard.ensure_vscode_installed", return_value=True
+        ) as ensure_vscode, patch(
+            "projectdevsetup.wizard.install_extensions"
+        ) as install_extensions, patch(
+            "projectdevsetup.wizard.create_venv"
+        ) as create_venv, patch(
+            "projectdevsetup.wizard.open_in_vscode"
+        ) as open_in_vscode:
+            wizard.run()
+
+        create_file.assert_called_once_with("python", "hello", Path("fake-output"))
+        ensure_vscode.assert_called_once()
+        install_extensions.assert_called_once_with("python")
+        create_venv.assert_called_once_with(Path("fake-output"))
+        open_in_vscode.assert_called_once_with(created_file)
+
 
 if __name__ == "__main__":
     unittest.main()
