@@ -1,33 +1,6 @@
-# projectdevsetup
-
-**Automatic Developer Environment Setup for Beginners**
-
-Made with love by [Zenith Open Source Projects](https://zenithopensourceprojects.vercel.app)
-
----
-
-## What is projectdevsetup?
+# PROJECT DEVSETUP
 
 projectdevsetup is a beginner-friendly tool that automatically sets up your computer for coding. You don't need to know anything about programming or technical stuff - just run the tool and it will:
-
-- Ask you which programming language you want to learn
-- Install all the necessary software for that language
-- Install Visual Studio Code (a code editor)
-- Install helpful extensions for your language
-- Create a starter file with example code
-- Open everything ready for you to start coding!
-
----
-
-## Who is this for?
-
-**Complete beginners** who have never written a single line of code. You don't need to know:
-- What a compiler is
-- What PATH means
-- How to install software
-- Any technical jargon
-
-If you can use a web browser and type on a keyboard, you can use this!
 
 ---
 
@@ -194,43 +167,6 @@ Just open the file in your web browser!
 
 ---
 
-## Troubleshooting
-
-### "Command not found" error
-
-If you see this error, try restarting your terminal/command prompt and try again.
-
-### Installation failed
-
-Make sure you have:
-- Internet connection
-- Enough space on your computer (at least 2GB free)
-- Administrator rights (on Windows)
-
-### Visual Studio Code didn't open
-
-You can open it manually:
-1. Search for "Visual Studio Code" in your apps
-2. Open it
-3. Go to File > Open Folder
-4. Find the folder: `C:\Users\YourName\projectdevsetup_projects\YourFileName`
-
----
-
-## What's Included in Your Project Folder
-
-When you run the tool, it creates a folder with these files:
-
-```
-projectdevsetup_projects/
-└── yourfilename/
-    ├── yourfilename.py       (your code)
-    ├── requirements.txt     (list of Python packages)
-    └── .venv/               (virtual environment for Python)
-```
-
----
-
 ## Want to Learn More?
 
 Here are great resources for beginners:
@@ -248,39 +184,3 @@ Here are great resources for beginners:
 - https://www.freecodecamp.org/learn/html-css/
 
 ---
-
-## Uninstallation
-
-If you want to remove projectdevsetup:
-
-```bash
-pip uninstall projectdevsetup
-```
-
----
-
-## Credits
-
-**Developer**: roshhellwett  
-**Email**: roshhellwett@icloud.com  
-**Organization**: [Zenith Open Source Projects](https://zenithopensourceprojects.vercel.app)  
-**Copyright**: (c) 2026 Zenith Open Source Projects
-
----
-
-## License
-
-This project is licensed under the **MIT License** - see the LICENSE file for details.
-
----
-
-## Need Help?
-
-If you encounter any issues or have questions:
-1. Check the troubleshooting section above
-2. Visit: https://github.com/zenith-open-source/projectdevsetup
-3. Open an issue on GitHub
-
----
-
-**Happy Coding!** 🚀
