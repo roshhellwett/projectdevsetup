@@ -15,6 +15,12 @@ def main() -> None:
         print()
         error("Setup cancelled by user. Run 'projectdevsetup' to start again.")
         raise SystemExit(0)
+    except EOFError:
+        error(
+            "No interactive input was received. Run 'projectdevsetup' in an interactive terminal "
+            "and follow the prompts."
+        )
+        raise SystemExit(1)
     except SystemExit:
         raise
     except Exception:
