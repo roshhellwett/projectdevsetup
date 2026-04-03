@@ -1,22 +1,8 @@
-# projectdevsetup
+# PROJECT DEV SETUP
 
-`projectdevsetup` is a beginner-friendly tool that helps set up a coding environment for common programming languages.
+ Beginner-friendly tool that helps set up a coding environment for common programming languages. It is designed for people who want a guided setup experience instead of manually installing everything one by one.
 
-It is designed for people who want a guided setup experience instead of manually installing everything one by one.
-
-## What it does
-
-When you run the tool, it:
-
-- Checks that you have internet access
-- Checks that there is enough disk space
-- Warns if admin rights may be needed
-- Asks which language you want to set up
-- Tries to install the required tools for that language
-- Tries to install Visual Studio Code
-- Tries to install recommended VS Code extensions
-- Creates a starter project folder and starter file
-- Creates a Python virtual environment for Python projects
+---
 
 ## Supported languages
 
@@ -208,6 +194,6 @@ Build release artifacts with:
 python setup.py sdist bdist_wheel
 ```
 
-## License
+---
 
-MIT
+© 2026 [Zenith Open Source Projects](https://zenithopensourceprojects.vercel.app/). All Rights Reserved. Zenith is a Open Source Project Idea's by @roshhellwett
