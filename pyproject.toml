@@ -7,7 +7,7 @@ name = "projectdevsetup"
 version = "1.0.0"
 description = "Automatic developer environment setup for beginners"
 readme = "README.md"
-license = { file = "LICENSE" }
+license = "MIT"
 authors = [
     { name = "roshhellwett", email = "roshhellwett@icloud.com" }
 ]
@@ -17,7 +17,6 @@ keywords = [
 ]
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Intended Audience :: Developers",
     "Topic :: Software Development :: Build Tools",
@@ -26,7 +25,21 @@ requires-python = ">=3.8"
 dependencies = [
     "colorama>=0.4.6"
 ]
+license-files = ["LICENSE"]
+
+[project.scripts]
+projectdevsetup = "projectdevsetup.__main__:main"
 
 [project.urls]
 Homepage = "https://github.com/zenith-open-source/projectdevsetup"
 Organization = "https://zenithopensourceprojects.vercel.app"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["projectdevsetup*"]
+
+[tool.setuptools.package-data]
+projectdevsetup = ["templates/*"]

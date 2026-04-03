@@ -5,6 +5,7 @@ __pycache__/
 dist/
 build/
 .venv/
+.tmp-tests/
 *.log
 .DS_Store
 Thumbs.db

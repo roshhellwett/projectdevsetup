@@ -1,11 +1,3 @@
-"""
-@project  projectdevsetup
-@org      Zenith Open Source Projects
-@license  MIT License
-@author   roshhellwett
-"""
+"""Compatibility wrapper for the old source layout."""
 
-__version__ = "1.0.0"
-__author__ = "roshhellwett"
-__org__ = "Zenith Open Source Projects"
-__email__ = "roshhellwett@icloud.com"
+from projectdevsetup import *  # noqa: F401,F403
