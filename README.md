@@ -8,11 +8,11 @@
 
  Beginner-friendly tool that helps set up a coding environment for common programming languages. It is designed for people who want a guided setup experience instead of manually installing everything one by one.
 
-[SAMPLEZERO](https://github.com/roshhellwett/projectdevsetup/blob/eaa8b3766acf15159386acfad8387925b0d3eb3e/sample/samplezero.png)
+![SAMPLEZERO](https://github.com/roshhellwett/projectdevsetup/blob/eaa8b3766acf15159386acfad8387925b0d3eb3e/sample/samplezero.png)
 
-[SAMPLEONE](https://github.com/roshhellwett/projectdevsetup/blob/eaa8b3766acf15159386acfad8387925b0d3eb3e/sample/sampleone.png)
+![SAMPLEONE](https://github.com/roshhellwett/projectdevsetup/blob/eaa8b3766acf15159386acfad8387925b0d3eb3e/sample/sampleone.png)
 
-[SAMPLETWO](https://github.com/roshhellwett/projectdevsetup/blob/eaa8b3766acf15159386acfad8387925b0d3eb3e/sample/samplethree.png)
+![SAMPLETWO](https://github.com/roshhellwett/projectdevsetup/blob/eaa8b3766acf15159386acfad8387925b0d3eb3e/sample/samplethree.png)
 
 ---
 
