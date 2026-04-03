@@ -1,80 +1,76 @@
-# PROJECT DEVSETUP
+# projectdevsetup
 
-projectdevsetup is a beginner-friendly tool that automatically sets up your computer for coding. You don't need to know anything about programming or technical stuff - just run the tool and it will:
+`projectdevsetup` is a beginner-friendly tool that helps set up a coding environment for common programming languages.
 
----
+It is designed for people who want a guided setup experience instead of manually installing everything one by one.
 
-## Supported Programming Languages
+## What it does
 
-| # | Language | What it can do |
-|---|----------|---------------|
-| 1 | **Python** | Websites, games, AI, data science |
-| 2 | **C** | System programs, hardware programming |
-| 3 | **C++** | Games, high-performance applications |
-| 4 | **Java** | Android apps, enterprise software |
-| 5 | **HTML/CSS** | Build websites |
-| 6 | **JavaScript** | Websites, web apps |
-| 7 | **Rust** | Safe and fast software |
-| 8 | **Go** | Servers and cloud applications |
+When you run the tool, it:
 
----
+- Checks that you have internet access
+- Checks that there is enough disk space
+- Warns if admin rights may be needed
+- Asks which language you want to set up
+- Tries to install the required tools for that language
+- Tries to install Visual Studio Code
+- Tries to install recommended VS Code extensions
+- Creates a starter project folder and starter file
+- Creates a Python virtual environment for Python projects
+
+## Supported languages
+
+1. Python
+2. C
+3. C++
+4. Java
+5. HTML / CSS
+6. JavaScript
+7. Rust
+8. Go
+9. All languages
 
 ## Installation
 
-### Step 1: Install Python (if not already installed)
+First, make sure Python is installed.
 
-Before installing projectdevsetup, you need Python on your computer.
-
-**For Windows:**
-1. Go to https://www.python.org/downloads/
-2. Click "Download Python 3.12"
-3. Run the installer
-4. **Important**: Check the box "Add Python to PATH"
-5. Click "Install Now"
-
-**For Mac:**
-1. Open Terminal (press Cmd+Space, type "Terminal")
-2. Type: `brew install python3`
-3. Press Enter
-
-**For Linux:**
-1. Open Terminal
-2. Type: `sudo apt update` then `sudo apt install python3`
-3. Press Enter
-
-### Step 2: Install projectdevsetup
-
-Open your terminal/command prompt and type:
+Then install the package with:
 
 ```bash
 pip install projectdevsetup
 ```
 
-Wait for it to install. That's it!
+## How to run it
 
----
+You can start it with either command:
 
-## How to Use
+```bash
+projectdevsetup
+```
 
-### Step 1: Run the tool
-
-In your terminal, type:
+or:
 
 ```bash
 python -m projectdevsetup
 ```
 
-### Step 2: Follow the instructions
+## How to use it
 
-The tool will ask you questions. Here's what to expect:
+### 1. Start the tool
 
-```
+Run one of the commands above in your terminal.
+
+### 2. Pick a language
+
+The tool will show a menu like this:
+
+```text
 ============================================================
   projectdevsetup - Zenith Open Source Projects
   Automatic Developer Environment Setup for Beginners
 ============================================================
 
-Which programming language do you want to set up?
+  Which programming language do you want to set up?
 
   1. Python
   2. C
@@ -85,102 +81,133 @@ Which programming language do you want to set up?
   7. Rust
   8. Go
   9. All Languages
-
->>  Enter a number (1-9):
 ```
 
-**Type the number** of the language you want to learn and press Enter.
+Enter a number from `1` to `9`.
 
-### Step 3: Name your file
+### 3. Name your starter file
 
-```
+If you choose a single language, the tool asks for a file name.
+
+Example:
+
+```text
 What do you want to name your file? (without extension)
 Example: if you type 'hello', your file will be 'hello.py'
-
->>  File name:
 ```
 
-**Type a name** for your first file (like "hello" or "myfirstprogram") and press Enter.
+If your name contains special characters, the tool replaces them with underscores.
 
-### Step 4: Wait for installation
+### 4. Let the setup finish
 
-The tool will:
-1. Check your internet connection
-2. Install the programming language
-3. Install Visual Studio Code
-4. Install helpful extensions
-5. Create your starter file
+The tool then goes through these steps:
 
-This may take a few minutes. Don't worry - it will tell you when it's done!
+1. Installs the selected language tools
+2. Sets up Visual Studio Code
+3. Installs recommended VS Code extensions
+4. Creates your starter file
 
-### Step 5: Start coding!
+For Python, it also creates:
 
-When it's done, Visual Studio Code will open with your file. You can start editing and running your code!
+- `.venv`
+- `requirements.txt`
 
----
+### 5. Open your project
 
-## How to Run Your Code
+Your project is created in:
 
-After the tool creates your file, here's how to run it:
+```text
+~/projectdevsetup_projects/<your-file-name>
+```
+
+On Windows, that is usually under your user home directory.
+
+## Example output
+
+For a Python project named `hello`, the tool will create something like:
+
+```text
+projectdevsetup_projects/
+  hello/
+    hello.py
+    requirements.txt
+    .venv/
+```
+
+## How to run your code later
 
 ### Python
+
 ```bash
-python yourfilename.py
+python hello.py
 ```
 
 ### C
+
 ```bash
-gcc yourfilename.c -o program
+gcc hello.c -o program
 ./program
 ```
 
 ### C++
+
 ```bash
-g++ yourfilename.cpp -o program
+g++ hello.cpp -o program
 ./program
 ```
 
 ### Java
+
 ```bash
-javac YourFilename.java
-java YourFilename
+javac Hello.java
+java Hello
 ```
 
 ### JavaScript
+
 ```bash
-node yourfilename.js
+node hello.js
 ```
 
 ### Rust
+
 ```bash
-rustc yourfilename.rs
-./yourfilename
+rustc hello.rs
+./hello
 ```
 
 ### Go
+
 ```bash
-go run yourfilename.go
+go run hello.go
 ```
 
-### HTML/CSS
-Just open the file in your web browser!
+### HTML / CSS
 
----
+Open the generated HTML file in your browser or in VS Code.
 
-## Want to Learn More?
+## Important notes
 
-Here are great resources for beginners:
+- The tool needs internet access to install packages and editors.
+- Some installs may require administrator or sudo permissions.
+- Installation success depends on the operating system and external installers being available.
+- If VS Code or a language tool cannot be installed automatically, the tool shows a manual fallback message.
 
-### Python
-- https://www.python.org/about/gettingstarted/
-- https://www.freecodecamp.org/learn/python/
+## Development and testing
 
-### JavaScript
-- https://www.javascript.com/
-- https://www.freecodecamp.org/learn/javascript/
+Run tests from the repository root with:
 
-### HTML/CSS
-- https://www.w3schools.com/html/
-- https://www.freecodecamp.org/learn/html-css/
+```bash
+$env:PYTHONPATH="src"
+python -m unittest discover -s tests
+```
 
----
+Build release artifacts with:
+
+```bash
+python setup.py sdist bdist_wheel
+```
+
+## License
+
+MIT
