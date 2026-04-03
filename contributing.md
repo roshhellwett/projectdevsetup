@@ -148,8 +148,3 @@ When reporting a bug, please include:
 - What actually happened
 - Any visible error message
 
-## Code of conduct
-
-Please be respectful and constructive.
-
-This project exists to help beginners, so contributor discussions should also stay welcoming and patient.
