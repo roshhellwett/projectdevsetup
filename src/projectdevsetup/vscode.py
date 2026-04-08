@@ -6,7 +6,6 @@ from __future__ import annotations
 
 import subprocess
 import webbrowser
-from pathlib import Path
 
 from projectdevsetup.detector import check_brew, check_vscode
 from projectdevsetup.network import download_file, get_temp_dir
@@ -194,16 +193,3 @@ def install_extensions(language: str) -> bool:
 
     return all_success
 
-
-def open_in_vscode(file_path: Path) -> None:
-    """Open a file in VS Code when the `code` command is available."""
-    if not check_vscode():
-        warning("VS Code is not available. Please open your file manually.")
-        return
-
-    try:
-        info(f"Opening {file_path.name} in VS Code...")
-        subprocess.Popen(["code", str(file_path)])
-        success(f"VS Code opened with {file_path.name}!")
-    except Exception:
-        warning(f"Could not open VS Code automatically. Please open this file manually:\n  {file_path}")

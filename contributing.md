@@ -32,8 +32,6 @@ Important modules:
   Connectivity and download helpers
 - [`src/projectdevsetup/permissions.py`](/D:/projectdevsetup/src/projectdevsetup/permissions.py)
   Permission and disk-space checks
-- [`src/projectdevsetup/templates`](/D:/projectdevsetup/src/projectdevsetup/templates)
-  Starter files created for users
 
 Tests:
 
@@ -76,13 +74,13 @@ From the repository root:
 
 ```bash
 $env:PYTHONPATH="src"
-python -m unittest discover -s tests
+python -m pytest tests/ -v
 ```
 
 If you are on macOS or Linux:
 
 ```bash
-PYTHONPATH=src python -m unittest discover -s tests
+PYTHONPATH=src python -m pytest tests/ -v
 ```
 
 ## Building release artifacts
@@ -90,7 +88,7 @@ PYTHONPATH=src python -m unittest discover -s tests
 To build the source distribution and wheel:
 
 ```bash
-python setup.py sdist bdist_wheel
+python -m build
 ```
 
 Expected output:
@@ -124,7 +122,6 @@ Please check as many of these as possible:
 - Improve beginner-facing messages
 - Add tests for setup flows and failure cases
 - Improve README and contributor documentation
-- Improve starter templates
 - Improve reliability of detection and fallback behavior
 
 ## Pull request checklist
@@ -147,4 +144,3 @@ When reporting a bug, please include:
 - What you expected to happen
 - What actually happened
 - Any visible error message
-

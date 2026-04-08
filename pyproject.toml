@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "projectdevsetup"
-version = "1.1.0"
-description = "Automatic developer environment setup for beginners"
+version = "1.2.0"
+description = "Automatic developer environment setup for beginners — installs language tools, VS Code, and extensions"
 readme = "README.md"
 license = "MIT"
 authors = [
@@ -41,5 +41,5 @@ include-package-data = true
 where = ["src"]
 include = ["projectdevsetup*"]
 
-[tool.setuptools.package-data]
-projectdevsetup = ["templates/*"]
+[tool.pytest.ini_options]
+testpaths = ["tests"]

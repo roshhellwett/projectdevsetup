@@ -6,7 +6,7 @@
 
 # PROJECT DEV SETUP
 
- Beginner-friendly tool that helps set up a coding environment for common programming languages. It is designed for people who want a guided setup experience instead of manually installing everything one by one.
+Beginner-friendly tool that sets up a coding environment for common programming languages. It is designed for people who want a guided setup experience instead of manually installing everything one by one.
 
 ![SAMPLEZERO](https://github.com/roshhellwett/projectdevsetup/blob/eaa8b3766acf15159386acfad8387925b0d3eb3e/sample/samplezero.png)
 
@@ -15,6 +15,10 @@
 ![SAMPLETWO](https://github.com/roshhellwett/projectdevsetup/blob/eaa8b3766acf15159386acfad8387925b0d3eb3e/sample/samplethree.png)
 
 ---
+
+## What it does
+
+The tool installs the language toolchain, sets up Visual Studio Code, and installs the recommended VS Code extensions — all in one guided flow.
 
 ## Supported languages
 
@@ -26,7 +30,7 @@
 6. JavaScript
 7. Rust
 8. Go
-9. All languages
+9. All languages (installs everything)
 
 ## Installation
 
@@ -83,106 +87,17 @@ The tool will show a menu like this:
 
 Enter a number from `1` to `9`.
 
-### 3. Name your starter file
-
-If you choose a single language, the tool asks for a file name.
-
-Example:
-
-```text
-What do you want to name your file? (without extension)
-Example: if you type 'hello', your file will be 'hello.py'
-```
-
-If your name contains special characters, the tool replaces them with underscores.
-
-### 4. Let the setup finish
+### 3. Let the setup finish
 
 The tool then goes through these steps:
 
 1. Installs the selected language tools
 2. Sets up Visual Studio Code
 3. Installs recommended VS Code extensions
-4. Creates your starter file
 
-For Python, it also creates:
+### 4. Start coding
 
-- `.venv`
-- `requirements.txt`
-
-### 5. Open your project
-
-Your project is created in:
-
-```text
-~/projectdevsetup_projects/<your-file-name>
-```
-
-On Windows, that is usually under your user home directory.
-
-## Example output
-
-For a Python project named `hello`, the tool will create something like:
-
-```text
-projectdevsetup_projects/
-  hello/
-    hello.py
-    requirements.txt
-    .venv/
-```
-
-## How to run your code later
-
-### Python
-
-```bash
-python hello.py
-```
-
-### C
-
-```bash
-gcc hello.c -o program
-./program
-```
-
-### C++
-
-```bash
-g++ hello.cpp -o program
-./program
-```
-
-### Java
-
-```bash
-javac Hello.java
-java Hello
-```
-
-### JavaScript
-
-```bash
-node hello.js
-```
-
-### Rust
-
-```bash
-rustc hello.rs
-./hello
-```
-
-### Go
-
-```bash
-go run hello.go
-```
-
-### HTML / CSS
-
-Open the generated HTML file in your browser or in VS Code.
+Once setup completes, open VS Code and start writing code in your chosen language.
 
 ## Important notes
 
@@ -197,13 +112,19 @@ Run tests from the repository root with:
 
 ```bash
 $env:PYTHONPATH="src"
-python -m unittest discover -s tests
+python -m pytest tests/ -v
+```
+
+If you are on macOS or Linux:
+
+```bash
+PYTHONPATH=src python -m pytest tests/ -v
 ```
 
 Build release artifacts with:
 
 ```bash
-python setup.py sdist bdist_wheel
+python -m build
 ```
 
 ---

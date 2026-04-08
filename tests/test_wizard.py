@@ -1,42 +1,44 @@
 from __future__ import annotations
 
 import unittest
-from pathlib import Path
 from unittest.mock import patch
 
 from projectdevsetup import wizard
 
 
-class WizardTests(unittest.TestCase):
-    def test_get_file_name_sanitizes_special_characters(self) -> None:
-        with patch("projectdevsetup.wizard.ask", side_effect=["my file!"]):
-            self.assertEqual(wizard._get_file_name("python"), "my_file_")
+class SelectLanguageTests(unittest.TestCase):
+    def test_valid_selection_returns_name_and_key(self) -> None:
+        for num, (name, key) in wizard.LANGUAGES.items():
+            with patch("projectdevsetup.wizard.ask", return_value=num):
+                result_name, result_key = wizard._select_language()
+            self.assertEqual(result_name, name)
+            self.assertEqual(result_key, key)
 
-    def test_create_python_starter_file_uses_template(self) -> None:
-        output_dir = Path("fake-output")
-        with patch.object(Path, "read_text", return_value='print("Hello, World!")') as read_text, patch.object(
-            Path, "write_text"
-        ) as write_text:
-            created = wizard._create_starter_file("python", "hello", output_dir)
-        self.assertEqual(created, output_dir / "hello.py")
-        read_text.assert_called_once()
-        write_text.assert_called_once_with('print("Hello, World!")', encoding="utf-8")
+    def test_invalid_then_valid_selection(self) -> None:
+        with patch("projectdevsetup.wizard.ask", side_effect=["0", "abc", "1"]):
+            name, key = wizard._select_language()
+        self.assertEqual(name, "Python")
+        self.assertEqual(key, "python")
 
-    def test_create_java_starter_file_uses_class_name(self) -> None:
-        output_dir = Path("fake-output")
-        with patch.object(Path, "write_text") as write_text:
-            created = wizard._create_starter_file("java", "my_first_app", output_dir)
-        self.assertEqual(created.name, "MyFirstApp.java")
-        self.assertIn("public class MyFirstApp", write_text.call_args.args[0])
 
+class PreflightTests(unittest.TestCase):
     def test_preflight_exits_without_internet(self) -> None:
         with patch("projectdevsetup.wizard.check_internet", return_value=False):
             with self.assertRaises(SystemExit) as ctx:
                 wizard._preflight_checks()
         self.assertEqual(ctx.exception.code, 1)
 
-    def test_run_python_flow_completes_happy_path(self) -> None:
-        fake_installer = type(
+    def test_preflight_exits_on_insufficient_disk_space(self) -> None:
+        with patch("projectdevsetup.wizard.check_internet", return_value=True), \
+             patch("projectdevsetup.wizard.check_disk_space", return_value=False):
+            with self.assertRaises(SystemExit) as ctx:
+                wizard._preflight_checks()
+        self.assertEqual(ctx.exception.code, 1)
+
+
+class RunFlowTests(unittest.TestCase):
+    def _make_fake_installer(self):
+        return type(
             "FakeInstaller",
             (),
             {
@@ -44,34 +46,77 @@ class WizardTests(unittest.TestCase):
                 "install_for_language": lambda self, language: True,
             },
         )
-        created_file = Path("fake-output/hello.py")
+
+    def test_run_single_language_flow(self) -> None:
+        fake_installer = self._make_fake_installer()
 
         with patch("projectdevsetup.wizard._preflight_checks"), patch(
             "projectdevsetup.wizard._select_language", return_value=("Python", "python")
         ), patch(
-            "projectdevsetup.wizard._get_file_name", return_value="hello"
-        ), patch(
-            "projectdevsetup.wizard._get_output_dir", return_value=Path("fake-output")
-        ), patch(
-            "projectdevsetup.wizard._create_starter_file", return_value=created_file
-        ) as create_file, patch(
             "projectdevsetup.wizard.Installer", fake_installer
         ), patch(
             "projectdevsetup.wizard.ensure_vscode_installed", return_value=True
         ) as ensure_vscode, patch(
             "projectdevsetup.wizard.install_extensions"
-        ) as install_extensions, patch(
-            "projectdevsetup.wizard.create_venv"
-        ) as create_venv, patch(
-            "projectdevsetup.wizard.open_in_vscode"
-        ) as open_in_vscode:
+        ) as install_ext:
             wizard.run()
 
-        create_file.assert_called_once_with("python", "hello", Path("fake-output"))
         ensure_vscode.assert_called_once()
-        install_extensions.assert_called_once_with("python")
-        create_venv.assert_called_once_with(Path("fake-output"))
-        open_in_vscode.assert_called_once_with(created_file)
+        install_ext.assert_called_once_with("python")
+
+    def test_run_all_languages_flow(self) -> None:
+        fake_installer = self._make_fake_installer()
+        installed_langs: list[str] = []
+
+        original_install = fake_installer.install_for_language
+
+        def tracking_install(self_inst, lang):
+            installed_langs.append(lang)
+            return True
+
+        fake_installer.install_for_language = tracking_install
+
+        with patch("projectdevsetup.wizard._preflight_checks"), patch(
+            "projectdevsetup.wizard._select_language", return_value=("All Languages", "all")
+        ), patch(
+            "projectdevsetup.wizard.Installer", fake_installer
+        ), patch(
+            "projectdevsetup.wizard.ensure_vscode_installed", return_value=True
+        ), patch(
+            "projectdevsetup.wizard.install_extensions"
+        ) as install_ext:
+            wizard.run()
+
+        # Should have installed all 8 individual languages
+        self.assertEqual(len(installed_langs), 8)
+        self.assertNotIn("all", installed_langs)
+        # Extensions installed for each language
+        self.assertEqual(install_ext.call_count, 8)
+
+    def test_run_skips_extensions_when_vscode_not_available(self) -> None:
+        fake_installer = self._make_fake_installer()
+
+        with patch("projectdevsetup.wizard._preflight_checks"), patch(
+            "projectdevsetup.wizard._select_language", return_value=("Go", "go")
+        ), patch(
+            "projectdevsetup.wizard.Installer", fake_installer
+        ), patch(
+            "projectdevsetup.wizard.ensure_vscode_installed", return_value=False
+        ), patch(
+            "projectdevsetup.wizard.install_extensions"
+        ) as install_ext:
+            wizard.run()
+
+        install_ext.assert_not_called()
+
+
+class LanguageConstantsTests(unittest.TestCase):
+    def test_all_lang_keys_excludes_all(self) -> None:
+        self.assertNotIn("all", wizard._ALL_LANG_KEYS)
+        self.assertEqual(len(wizard._ALL_LANG_KEYS), 8)
+
+    def test_languages_has_nine_entries(self) -> None:
+        self.assertEqual(len(wizard.LANGUAGES), 9)
 
 
 if __name__ == "__main__":

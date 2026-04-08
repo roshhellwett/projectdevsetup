@@ -4,12 +4,16 @@ Network helpers for downloads and connectivity checks.
 
 from __future__ import annotations
 
+import socket
 import tempfile
 import urllib.error
 import urllib.request
 from pathlib import Path
 
 from projectdevsetup.utils.logger import error, info, warning
+
+_CONNECT_TIMEOUT = 5
+_DOWNLOAD_TIMEOUT = 30
 
 
 def check_internet() -> bool:
@@ -20,7 +24,7 @@ def check_internet() -> bool:
         "https://www.microsoft.com",
     ):
         try:
-            urllib.request.urlopen(host, timeout=5)
+            urllib.request.urlopen(host, timeout=_CONNECT_TIMEOUT)
             return True
         except Exception:
             continue
@@ -43,10 +47,20 @@ def download_file(
                 percent = min(int(count * block_size * 100 / total_size), 100)
                 print(f"\r  Progress: {percent}%   ", end="", flush=True)
 
-            urllib.request.urlretrieve(url, str(destination), reporthook=progress_hook)
+            # Set a global socket timeout for the download
+            old_timeout = socket.getdefaulttimeout()
+            socket.setdefaulttimeout(_DOWNLOAD_TIMEOUT)
+            try:
+                urllib.request.urlretrieve(url, str(destination), reporthook=progress_hook)
+            finally:
+                socket.setdefaulttimeout(old_timeout)
             print()
             return True
+        except KeyboardInterrupt:
+            print()
+            raise
         except urllib.error.URLError:
+            print()
             warning(
                 f"Download attempt {attempt} failed. Checking your internet connection..."
             )
@@ -56,6 +70,7 @@ def download_file(
                 )
                 return False
         except Exception:
+            print()
             warning(f"Download attempt {attempt} failed. Retrying...")
 
     error(

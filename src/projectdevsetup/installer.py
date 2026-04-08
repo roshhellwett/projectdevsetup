@@ -87,10 +87,11 @@ class Installer:
                     "PrependPath=1",
                     "Include_test=0",
                 ],
+                capture_output=True,
                 timeout=300,
                 check=False,
             )
-        except Exception:
+        except (subprocess.TimeoutExpired, Exception):
             self._show_manual_install("Python", "https://www.python.org/downloads/")
             return False
 
@@ -136,6 +137,7 @@ class Installer:
         try:
             subprocess.run(
                 [str(installer), "install", "--root", "C:\\msys64", "--confirm-command"],
+                capture_output=True,
                 timeout=600,
                 check=False,
             )
@@ -146,11 +148,12 @@ class Installer:
                     "--noconfirm",
                     "mingw-w64-x86_64-gcc",
                 ],
+                capture_output=True,
                 timeout=300,
                 check=False,
             )
             add_to_path("C:\\msys64\\mingw64\\bin", "GCC")
-        except Exception:
+        except (subprocess.TimeoutExpired, Exception):
             self._show_manual_install("GCC (MSYS2)", "https://www.msys2.org/")
             return False
 
@@ -203,8 +206,8 @@ class Installer:
             return False
 
         try:
-            subprocess.run([str(installer), "/s"], timeout=300, check=False)
-        except Exception:
+            subprocess.run([str(installer), "/s"], capture_output=True, timeout=300, check=False)
+        except (subprocess.TimeoutExpired, Exception):
             self._show_manual_install("Java JDK", "https://adoptium.net/")
             return False
 
@@ -236,8 +239,11 @@ class Installer:
             return False
 
         try:
-            subprocess.run(["msiexec", "/i", str(installer), "/quiet"], timeout=300, check=False)
-        except Exception:
+            subprocess.run(
+                ["msiexec", "/i", str(installer), "/quiet"],
+                capture_output=True, timeout=300, check=False,
+            )
+        except (subprocess.TimeoutExpired, Exception):
             self._show_manual_install("Node.js", "https://nodejs.org/")
             return False
 
@@ -280,9 +286,9 @@ class Installer:
             return False
 
         try:
-            subprocess.run([str(installer), "-y"], timeout=600, check=False)
+            subprocess.run([str(installer), "-y"], capture_output=True, timeout=600, check=False)
             add_to_path(str(Path.home() / ".cargo" / "bin"), "Rust/Cargo")
-        except Exception:
+        except (subprocess.TimeoutExpired, Exception):
             self._show_manual_install("Rust", "https://rustup.rs/")
             return False
 
@@ -337,9 +343,12 @@ class Installer:
             return False
 
         try:
-            subprocess.run(["msiexec", "/i", str(installer), "/quiet"], timeout=300, check=False)
+            subprocess.run(
+                ["msiexec", "/i", str(installer), "/quiet"],
+                capture_output=True, timeout=300, check=False,
+            )
             add_to_path("C:\\Go\\bin", "Go")
-        except Exception:
+        except (subprocess.TimeoutExpired, Exception):
             self._show_manual_install("Go", "https://go.dev/dl/")
             return False
 
