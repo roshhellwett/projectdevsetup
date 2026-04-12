@@ -18,7 +18,10 @@ Beginner-friendly tool that sets up a coding environment for common programming 
 
 ## What it does
 
-The tool installs the language toolchain, sets up Visual Studio Code, and installs the recommended VS Code extensions — all in one guided flow.
+The tool installs the language toolchain, sets up Visual Studio Code, and installs the recommended VS Code extensions — all in one guided flow. 
+
+LINK - [ProjectDevSetup](https://www.piwheels.org/project/projectdevsetup/)
+
 
 ## Supported languages
 
